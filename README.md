@@ -1,6 +1,9 @@
 ```
 @NolanHzy 牛批
 ```
+#
+Docker镜像nolan大佬删除了，需要用的自己去找备份镜像
+拉镜像命令自行替换
 
 # nvjdc
 
@@ -250,7 +253,7 @@ cd /root/nolanjdc
 ```
 mkdir -p  Config && cd Config
 ```
-6手动建立Config.json 配置文件 注意ARM多一个配置 Captchaurl
+6手动建立Config.json 配置文件,Config.json配置文件和上面的AMD一样,注意ARM多一个配置 Captchaurl
 ```
 "Captchaurl": "http://xxxxx:5703",
 ```
@@ -279,6 +282,8 @@ export PATH="$PATH:$HOME/.dotnet"
 nohup dotnet NETJDC.dll --urls=http://*:5701 1>"$(pwd)"/log 2>&1 & #ARM64
 ```
 更新
+```
+```
 查询占用5701的端口进程 如果你的nvjdc是5701就查询 5701
 ```
 netstat -lnp|grep 5701
