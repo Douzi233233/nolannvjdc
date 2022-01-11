@@ -1,4 +1,6 @@
+```
 @NolanHzy 牛批
+```
 
 # nvjdc
 
@@ -53,11 +55,11 @@
 1拉源码
 国内
 ```
-git clone https://ghproxy.com/https://github.com/NolanHzy/nvjdcdocker.git /root/nolanjdc
+git clone https://ghproxy.com/https://github.com/TheBear888/nolannvjdc.git /root/nolanjdc
 ```
 国外
 ```
-git clone https://github.com/NolanHzy/nvjdcdocker.git /root/nolanjdc
+git clone https://github.com/TheBear888/nolannvjdc.git /root/nolanjdc
 ```
 
 
@@ -219,9 +221,90 @@ docker logs -f nolanjdc
 出现 NETJDC  started 即可 
 
 ## Arm安装教程
+1拉源码
+国内
+```
+git clone https://ghproxy.com/https://github.com/TheBear888/nolannvjdc.git /root/nolanjdc
+```
+国外
+```
+git clone https://github.com/TheBear888/nolannvjdc.git /root/nolanjdc
+```
+2拉取基础镜像 
+```
+sudo docker pull nolanhzy/nvjdccaptcha:arm
+```
+3执行启动基础镜像
+```
+sudo docker run   --name nvjdccaptcha -p 5703:5000  --restart=always  -d   -it --privileged=true  nolanhzy/nvjdccaptcha:arm
+```
+4执行命令安装浏览器
+```
+sudo apt-get install  chromium-browser
+```
+5创建一个目录放配置
+```
+cd /root/nolanjdc
+```
+然后执行
+```
+mkdir -p  Config && cd Config
+```
+6手动建立Config.json 配置文件 注意ARM多一个配置 Captchaurl
+```
+"Captchaurl": "http://xxxxx:5703",
+```
+7回到的目录 下载NET5.sh
+```
+cd /root/nolanjdc
+```
+然后
+```
+wget https://dot.net/v1/dotnet-install.sh
+```
+8设置权限
+```
+chmod 777 dotnet-install.sh
+```
+9下载NET5
+```
+./dotnet-install.sh -c 5.0
+```
+10设置 path
+```
+export PATH="$PATH:$HOME/.dotnet"
+```
+11启动
+```
+nohup dotnet NETJDC.dll --urls=http://*:5701 1>"$(pwd)"/log 2>&1 & #ARM64
+```
+更新
+查询占用5701的端口进程 如果你的nvjdc是5701就查询 5701
+```
+netstat -lnp|grep 5701
+```
+假如显示如下内容 tcp6 0 0 :::5701 :::* LISTEN 680536/dotnet
+杀死进程
+```
+kill -9 680536
+```
+```
+cd /root/nolanjdc
+```
+```
+git pull
+```
+```
+export PATH="$PATH:$HOME/.dotnet"
+```
+```
+nohup dotnet NETJDC.dll --urls=http://*:5701 1>"$(pwd)"/log 2>&1 & #ARM64
+```
 
 
-安装地址 https://github.com/NolanHzy/nvjdcdocker/blob/main/Arm%E5%AE%89%E8%A3%85%E8%AF%B4%E6%98%8E.md
+
+
+
 
 
 ## 1.2以前如何更新之1.2
